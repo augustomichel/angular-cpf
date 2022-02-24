@@ -1,0 +1,42 @@
+<div>
+  <h2 class="tituloSessao">Informe o CPF do futuro cooperado (a)</h2>
+</div>
+
+<form [formGroup]="formulario" (ngSubmit)="onSubmit()">
+  <div class="form-row align-items-center">
+    <div class="col-auto my-1">
+      <label for="nome" class="control-label" style="font-weight: bold"
+        >CPF</label
+      >
+      <input
+        [textMask]="{ mask: mask }"
+        class="form-control"
+        formControlName="cpf"
+        id="cpf"
+      />
+    </div>
+    <div class="col-auto my-1" style="padding-top: 30px">
+      <button
+        class="btn btn-primary"
+        style="background-color: #165c7d !important"
+        type="submit"
+        [disabled]="disable"
+      >
+        Consultar po CPF
+      </button>
+    </div>
+  </div>
+  <app-error-msg
+    [control]="$any(formulario.get('cpf'))"
+    label="CPF"
+  ></app-error-msg>
+  <div *ngIf="cpfnaoencontrado">
+    <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+    <span class="sr-only">(error)</span>
+    <div class="alert alert-danger errorDiv" role="alert">
+      CPF não encontrado
+    </div>
+  </div>
+</form>
+
+<router-outlet></router-outlet>
